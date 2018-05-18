@@ -1,16 +1,16 @@
 package com.example.myproject.model;
 
-import java.util.List;
-
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Comentario {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
 	@ManyToOne
@@ -21,9 +21,11 @@ public class Comentario {
 	
 	private String mensagem;
 	
-	@OneToMany(mappedBy="comentario")
-	private List<Resposta> respostas;
-	
+	@Override
+	public String toString() {
+		return "Comentario [id=" + id + ", remetente=" + remetente + ", destinatario=" + destinatario + ", mensagem="
+				+ mensagem + "]";
+	}
 	
 	public Usuario getRemetente() {
 		return remetente;
@@ -42,12 +44,6 @@ public class Comentario {
 	}
 	public void setMensagem(String mensagem) {
 		this.mensagem = mensagem;
-	}
-	public List<Resposta> getRespostas() {
-		return respostas;
-	}
-	public void setRespostas(List<Resposta> respostas) {
-		this.respostas = respostas;
 	}
 	public Long getId() {
 		return id;

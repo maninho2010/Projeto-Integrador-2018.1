@@ -37,9 +37,6 @@ public class Usuario implements Serializable{
 	@OneToMany(mappedBy="remetente")
 	private List<Comentario> comentariosComentados;
 	
-	@OneToMany(mappedBy="usuario")
-	private List<Resposta> respostasDadas;
-	
 	@ManyToMany
 	@JoinTable( 
 	        name = "usuarios_roles", 
@@ -116,12 +113,6 @@ public class Usuario implements Serializable{
 	}
 	public void setComentariosComentados(List<Comentario> comentariosComentados) {
 		this.comentariosComentados = comentariosComentados;
-	}
-	public List<Resposta> getRespostasDadas() {
-		return respostasDadas;
-	}
-	public void setRespostasDadas(List<Resposta> respostasDadas) {
-		this.respostasDadas = respostasDadas;
 	}
 		
 	

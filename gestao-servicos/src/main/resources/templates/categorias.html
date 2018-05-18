@@ -33,9 +33,11 @@
 
 	<div class="container">
 		<h2 class="h2 my-3">Categorias:</h2>
-		<th:block th:if="${#lists.size(categorias) == 0}">
+
+		<th:block th:if="${#lists.isEmpty(categorias)}">
 			<h6>Não há resultados disponíveis para sua pesquisa</h6>
 		</th:block>
+		
 		<div class="card-deck">
 			<div th:each="categ : ${categorias}" class="card bg-default mb-3 text-center" style="min-width: 15rem;">
 				<a class="card-link" th:href="@{/categorias/{id}(id=${categ.id})}">

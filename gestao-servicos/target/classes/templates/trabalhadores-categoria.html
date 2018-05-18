@@ -20,7 +20,7 @@
 	<th:block th:replace="fragments/navigation :: navbar"/>
 	<div class="container">
 		<h2 class="my-3 h2">Profissionais disponíveis na sua região:</h2>
-		<th:block th:if="${#lists.size(trabalhadores) == 0}">
+		<th:block th:if="${#lists.isEmpty(trabalhadores)}">
 			<h6>Não há Profissionais disponíveis na sua região.</h6>
 		</th:block>
 		<ul class="list-group">

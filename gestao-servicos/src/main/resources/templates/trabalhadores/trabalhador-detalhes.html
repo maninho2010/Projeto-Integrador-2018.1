@@ -7,12 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title th:text="${trabalhador.nome}">Username</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous" />
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
-    <script defer="" src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
     <link rel="stylesheet" th:href="@{/css/trabalhador-detalhes.css}" />
-    <link rel="stylesheet" th:href="@{/css/footer.css}" />
+	<link rel="stylesheet" th:href="@{/css/footer.css}" />
+	<link rel="stylesheet" th:href="@{/css/comentarios.css}" />
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" />
 </head>
 <body>
     <th:block th:replace="fragments/navigation :: navbar"/>
@@ -33,7 +31,7 @@
 				</div>
 
 			</div>
-			<div class="col-sm-s3">
+			<div class="col-sm-6">
 				<div class="contato p-1">
 					<i class="fas fa-phone"></i>
 					<span class="mx-2" th:text="${trabalhador.telefone}">(83)987-313692</span>
@@ -43,11 +41,52 @@
 					<span class="mx-2" th:text="${trabalhador.email}">emanueljp@gmail.com</span>
 				</div>
 			</div>
-        </div>
-        
-    </main>
+		</div>
 
-    <th:block th:replace="fragments/footer :: footer"/>
+		<section class="coments-section" >
+
+			<div id="section-fazer-comentario">
+				<form th:action="@{/comentarios/{login}(login=${trabalhador.login})}" th:object="${comentario}" method="POST">
+					<div class="d-flex align-items-start">
+						<a href="#">
+							<img th:src="@{/images/trabalhadores/avatar-1.jpg}" class="avatar mr-2" alt="avatar" />
+						</a>
+						<div class="d-flex flex-column align-items-end col-sm-6 p-0">
+							<textarea th:field="*{mensagem}" class="form-control" placeholder="Poste um comentário"></textarea>
+							<button type="submit" class="btn btn-primary mt-1">Enviar</button>
+						</div>
+					</div>
+				</form>
+			</div>
+ 	
+			<div id="section-comentarios">
+			
+				<!-- COMMMENT -->
+				<div class="d-flex py-2" th:each="comment : ${comentarios}">
+					<a href="#">
+						<img th:src="@{/images/trabalhadores/avatar-1.jpg}" class="avatar mr-2" alt="avatar" />
+					</a>
+					<div class="col-sm-10">
+						<a href="#" class="nome-autor" th:text="${comment.remetente.nome}">Emanuel Honorio</a>
+						<p class="mb-1 mensagem" th:text="${comment.mensagem}">Muito bom trabalhado!</p>
+				
+					</div>
+				</div>
+				<!--.// COMMMENT -->
+			
+			</div>
+
+		</section>
+        
+	</main>
+
+	<th:block th:replace="fragments/footer :: footer"/>
+	
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
 
 </body>
 </html>
